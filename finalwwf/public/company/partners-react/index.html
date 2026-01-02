@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partners</title>
+  <link rel="stylesheet" href="/company/partners/css/partnerships.css" />
+  <link rel="stylesheet" href="/company/partners/css/sections.css" />
+  <link rel="stylesheet" href="/company/partners/css/site.css" />
+</head>
+<body>
+  <div class="min-h-screen">
+    <section class="hero">
+      <div class="hero-inner container">
+        <div class="hero-text">
+          <h1>Be a Partner</h1>
+          <p>Grow your business by joining our partner network.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners container">
+      <header class="partners-head">
+        <h2>Be a partner</h2>
+        <p>Get listed in our application under any of these categories.</p>
+      </header>
+
+      <div class="card-grid">
+        <article class="partner-card" data-category="1" data-title="Home Bakers" tabindex="0">
+          <div class="img-wrap">
+            <img src="/company/partners/images/partnerships/HomeBakers.jpg" alt="Home Bakers" class="img-fluid" />
+          </div>
+          <div class="card-body">
+            <h3>Home Bakers</h3>
+            <p>Small-batch bakers and home confectionery businesses.</p>
+          </div>
+        </article>
+
+        <article class="partner-card" data-category="2" data-title="Restaurants & Bars" tabindex="0">
+          <div class="img-wrap">
+            <img src="/company/partners/images/partnerships/RestoBars.jpg" alt="Restaurants & Bars" class="img-fluid" />
+          </div>
+          <div class="card-body">
+            <h3>Restaurants & Bars</h3>
+            <p>Full service restaurants, quick service, and bar establishments.</p>
+          </div>
+        </article>
+
+        <article class="partner-card" data-category="3" data-title="Hangout Spots" tabindex="0">
+          <div class="img-wrap">
+            <img src="/company/partners/images/partnerships/HangoutSpots.jpg" alt="Hangout Spots" class="img-fluid" />
+          </div>
+          <div class="card-body">
+            <h3>Hangout Spots</h3>
+            <p>Cafes, lounges and family entertainment venues.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Drawer / side panel markup required by partnerships.js -->
+    <div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-labelledby="drawerTitle">
+      <button class="drawer-close" data-close aria-label="Close">&times;</button>
+      <div class="drawer-header">
+        <div class="drawer-img-wrap">
+          <img id="drawerImg" src="" alt="Partner Image" />
+        </div>
+        <h3 id="drawerTitle">Partnership Details</h3>
+        <p class="drawer-sub">Eligibility & Requirements</p>
+      </div>
+      <div class="drawer-body">
+        <div id="drawerTerms" class="terms"></div>
+
+        <form id="leadForm" method="post" action="/api/partners/lead" novalidate>
+          <input type="hidden" name="Category" id="leadCategory" />
+
+          <div class="form-grid">
+            <div class="full" style="margin-bottom:0">
+              <label for="leadEmail">Email Address *</label>
+              <input name="Email" id="leadEmail" type="email" required maxlength="100" placeholder="Enter your email address" autocomplete="email" />
+              <button type="button" id="sendOtpBtn" class="btn-primary">Send OTP</button>
+            </div>
+
+            <div class="full" id="otpSection" style="display:none">
+              <label for="otpInput">Enter OTP *</label>
+              <input type="text" id="otpInput" maxlength="6" placeholder="Enter the OTP sent to your email" inputmode="numeric" />
+              <button type="button" id="verifyOtpBtn" class="btn-primary">Verify OTP</button>
+              <div id="otpTimerDisplay" class="otp-timer"></div>
+            </div>
+          </div>
+
+          <div id="extraFields" style="display:none">
+            <div class="form-grid">
+              <div>
+                <label for="leadName">Full Name *</label>
+                <input name="Name" id="leadName" required maxlength="80" placeholder="Enter your full name" />
+              </div>
+              <div>
+                <label for="leadPhone">Contact Number *</label>
+                <input name="Phone" id="leadPhone" required maxlength="30" placeholder="Enter phone number" />
+              </div>
+              <div>
+                <label for="leadState">State *</label>
+                <select name="State" id="leadState" required>
+                  <option value="">Select State</option>
+                  <option>Delhi</option>
+                  <option>Maharashtra</option>
+                  <option>Karnataka</option>
+                </select>
+              </div>
+              <div class="full">
+                <label for="leadLocation">Business Location / Address *</label>
+                <input name="Location" id="leadLocation" required maxlength="150" placeholder="Enter business address (Street, City, Pin)" />
+              </div>
+            </div>
+
+            <div class="checkbox-group" style="margin:18px 0">
+              <label class="checkbox-label">
+                <input type="checkbox" name="AcceptTerms" id="acceptTerms" value="true" disabled />
+                I have read and accept the <span id="showTermsLink" class="terms-link">terms and conditions</span> *
+              </label>
+            </div>
+            <button type="submit" class="btn-primary" id="submitBtn" disabled>Submit Partnership Request</button>
+          </div>
+
+          <p id="leadMsg" class="lead-msg" role="status" aria-live="polite" style="margin-top:14px;min-height:16px"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+    <div id="termsDrawerBackdrop" class="terms-backdrop" style="display:none"></div>
+    <div class="drawer terms-drawer" id="termsDrawer" role="dialog" tabindex="-1" aria-modal="true" style="display:none">
+      <div class="terms-modal-shell">
+        <div class="terms-modal-content">
+          <button id="closeTermsDrawer" class="modal-close" aria-label="Close terms">&times;</button>
+          <h2>Terms &amp; Conditions</h2>
+          <div class="terms-scrollable-content">
+            <p>Please read these terms and conditions before accepting.</p>
+            <ul>
+              <li>All partners must comply with local laws and food safety regulations.</li>
+              <li>Uploads must be in allowed formats and not exceed size limits.</li>
+              <li>We may contact you using the details provided to verify the listing.</li>
+            </ul>
+          </div>
+          <div class="terms-actions">
+            <button id="acceptTermsBtnDrawer" class="btn-primary">Accept &amp; Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirmationModal" class="modal" style="display:none" aria-hidden="true">
+      <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-header"><h3>Thank you</h3></div>
+      <div class="modal-body"><p>Your partnership request has been received. We will contact you soon.</p></div>
+      <div class="modal-actions"><button id="modalOk" class="btn-primary">OK</button></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>try{emailjs.init("NKqMo7yjfTsoYYysu");}catch(e){console.warn('emailjs init failed',e)}</script>
+    <script src="/company/partners/js/partnerships.js"></script>
+  </div>
+</body>
+</html>

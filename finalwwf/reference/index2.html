@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wander With Food</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style2.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#181a20] text-white">
+      <nav class="sticky top-0 z-50 bg-[#181a20]/95 backdrop-blur-xl border-b border-[#292a2f]/50">
+      <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <img src="WWF Logo.png" alt="Wander With Food" class="h-12 w-auto" />
+        <span class="hidden sm:block text-xl font-bold text-[#ffb300]">Wander With Food</span>
+      </div>
+      
+      <!-- Menu Links -->
+      <ul class="hidden lg:flex gap-8 font-semibold text-base">
+        <li><a href="#hero" class="hover:text-[#ffb300] transition-colors duration-300 relative group">
+          Home
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffb300] transition-all duration-300 group-hover:w-full"></span>
+        </a></li>
+        <li><a href="#features" class="hover:text-[#ffb300] transition-colors duration-300 relative group">
+          Features
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffb300] transition-all duration-300 group-hover:w-full"></span>
+        </a></li>
+        <li><a href="#featured-restaurants" class="hover:text-[#ffb300] transition-colors duration-300 relative group">
+          Restaurants
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffb300] transition-all duration-300 group-hover:w-full"></span>
+        </a></li>
+        <li><a href="#steps" class="hover:text-[#ffb300] transition-colors duration-300 relative group">
+          How it Works
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffb300] transition-all duration-300 group-hover:w-full"></span>
+        </a></li>
+        <li><a href="#testimonials" class="hover:text-[#ffb300] transition-colors duration-300 relative group">
+          Reviews
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffb300] transition-all duration-300 group-hover:w-full"></span>
+        </a></li>
+        <li><a href="#contact" class="hover:text-[#ffb300] transition-colors duration-300 relative group">
+          Contact
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffb300] transition-all duration-300 group-hover:w-full"></span>
+        </a></li>
+      </ul>
+      
+
+      
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden text-[#ffb300] text-2xl p-2 rounded-full hover:bg-[#ffb300]/10 transition-colors duration-300" id="mobileMenuBtn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile Menu (hidden by default, show on click) -->
+    <div id="mobileMenu" class="lg:hidden hidden bg-[#181a20]/98 backdrop-blur-xl border-t border-[#292a2f]/50">
+      <div class="px-6 py-6">
+        <ul class="flex flex-col gap-6 font-semibold text-lg">
+          <li><a href="#hero" class="hover:text-[#ffb300] transition-colors duration-300 flex items-center gap-3">
+            <span class="w-1 h-6 bg-[#ffb300] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            Home
+          </a></li>
+          <li><a href="#features" class="hover:text-[#ffb300] transition-colors duration-300 flex items-center gap-3">
+            <span class="w-1 h-6 bg-[#ffb300] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            Features
+          </a></li>
+          <li><a href="#featured-restaurants" class="hover:text-[#ffb300] transition-colors duration-300 flex items-center gap-3">
+            <span class="w-1 h-6 bg-[#ffb300] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            Restaurants
+          </a></li>
+          <li><a href="#steps" class="hover:text-[#ffb300] transition-colors duration-300 flex items-center gap-3">
+            <span class="w-1 h-6 bg-[#ffb300] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            How it Works
+          </a></li>
+          <li><a href="#testimonials" class="hover:text-[#ffb300] transition-colors duration-300 flex items-center gap-3">
+            <span class="w-1 h-6 bg-[#ffb300] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            Reviews
+          </a></li>
+          <li><a href="#contact" class="hover:text-[#ffb300] transition-colors duration-300 flex items-center gap-3">
+            <span class="w-1 h-6 bg-[#ffb300] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            Contact
+          </a></li>
+          <li class="pt-4 border-t border-[#292a2f]/50">
+            <button class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-6 py-3 rounded-full hover:shadow-lg hover:shadow-[#ffb300]/25 transition-all duration-300 transform hover:scale-105 inline-block">
+              Get Started
+            </button>
+          </li>
+      </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero Section -->
+  <section id="hero" class="relative overflow-hidden bg-gradient-to-r from-[#ffb300] via-[#ff7a1a] to-[#ffd966] min-h-screen flex items-center">
+    <!-- Animated gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#ffb300]/90 via-[#ff7a1a]/90 to-[#ffd966]/90"></div>
+    
+    <!-- Floating geometric shapes with brand colors -->
+    <div class="absolute top-20 left-1/4 w-32 h-32 bg-[#ffb300]/20 rounded-full blur-xl animate-pulse floating-element"></div>
+    <div class="absolute bottom-20 right-1/4 w-24 h-24 bg-[#ff7a1a]/20 rounded-full blur-xl animate-pulse delay-1000 floating-element"></div>
+    <div class="absolute top-1/2 left-1/3 w-16 h-16 bg-[#ffd966]/20 rounded-full blur-xl animate-pulse delay-500 floating-element"></div>
+    
+    <!-- Abstract 3D-like shapes with brand colors -->
+    <div class="absolute top-1/4 right-1/3 w-40 h-40 transform rotate-45 bg-gradient-to-br from-[#ffb300]/30 to-[#ff7a1a]/20 rounded-2xl blur-sm floating-element"></div>
+    <div class="absolute bottom-1/3 left-1/2 w-32 h-32 transform -rotate-12 bg-gradient-to-br from-[#ff7a1a]/25 to-[#ffb300]/15 rounded-xl blur-sm floating-element"></div>
+    
+    <!-- Subtle pattern overlay with brand colors -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffb300" fill-opacity="0.08"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+    
+    <div class="container mx-auto px-6 py-10 md:py-16">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+        <!-- Left Content -->
+        <div class="flex-1 text-center lg:text-left" id="hero-left">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-[#181a20]">
+            One app<br>
+            <span class="text-[#181a20]">for all</span> <span class="text-[#181a20]">food needs</span>
+      </h1>
+          
+          <p class="text-xl md:text-2xl text-[#181a20]/90 mb-8 max-w-2xl mx-auto lg:mx-0">
+            Single account for all your food cravings. Discover, order, and enjoy from thousands of restaurants and home chefs.
+          </p>
+          
+                      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <button class="inline-flex items-center gap-3 bg-[#181a20] text-[#ffb300] font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:shadow-[#181a20]/25 transition-all duration-300 transform hover:scale-105">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <span>Download on the App Store</span>
+              </button>
+              <button class="inline-flex items-center gap-3 bg-[#181a20] text-[#ffb300] font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:shadow-[#181a20]/25 transition-all duration-300 transform hover:scale-105">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                <span>GET IT ON Google Play</span>
+              </button>
+    </div>
+          
+                      <!-- Stats -->
+            <div class="flex flex-wrap justify-center lg:justify-start gap-8 mt-12">
+              <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-[#181a20]">1M+</div>
+                <div class="text-[#181a20]/80 text-sm">Happy Users</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-[#181a20]">1000+</div>
+                <div class="text-[#181a20]/80 text-sm">Dishes Available</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-[#181a20]">50+</div>
+                <div class="text-[#181a20]/80 text-sm">Cities Covered</div>
+              </div>
+            </div>
+        </div>
+        
+                  <!-- Right Content -->
+          <div class="flex-1 flex justify-center lg:justify-end" id="hero-right">
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-r from-[#ffb300]/30 to-[#ff7a1a]/20 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+              <img src="hero-header0.png" alt="Delicious Food" class="relative w-80 md:w-[450px] lg:w-[500px] rounded-full shadow-2xl bg-[#181a20]/10 backdrop-blur-sm border border-[#ffb300]/30 hover:scale-110 transition-transform duration-500" />
+            </div>
+          </div>
+      </div>
+    </div>
+    
+          <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <button id="scrollDown" class="flex flex-col items-center gap-2 text-[#181a20]/80 hover:text-[#181a20] transition-colors duration-300 group">
+          <span class="text-sm font-medium">Scroll</span>
+          <div class="w-6 h-6 border-2 border-[#181a20]/60 rounded-full flex items-center justify-center group-hover:border-[#181a20] transition-colors duration-300">
+            <svg class="w-3 h-3 transform group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
+        </button>
+    </div>
+  </section>
+  <!-- Steps/Process Section -->
+  <section id="steps" class="py-20 md:py-32 bg-gradient-to-br from-[#181a20] to-[#0f0f13]">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6">
+          <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+            How It Works
+          </span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Simple, fast & safe. Get your favorite food delivered in just a few steps.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="group relative" id="step-card-1">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 h-full hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+            <div class="flex flex-col items-center text-center h-full">
+              <div class="w-16 h-16 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mb-6 text-2xl font-bold text-[#181a20]">
+                01
+      </div>
+              <h3 class="text-xl font-bold text-[#ffb300] mb-4">Create Account</h3>
+              <p class="text-gray-300 flex-grow">Sign up in seconds and join the Wander With Food community. Quick verification process.</p>
+              <div class="mt-6 w-8 h-0.5 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a]"></div>
+      </div>
+          </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="group relative" id="step-card-2">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 h-full hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+            <div class="flex flex-col items-center text-center h-full">
+              <div class="w-16 h-16 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mb-6 text-2xl font-bold text-[#181a20]">
+                02
+              </div>
+              <h3 class="text-xl font-bold text-[#ffb300] mb-4">Find Food</h3>
+              <p class="text-gray-300 flex-grow">Browse 1000+ dishes and filter by location, interest, and budget. Find exactly what you crave.</p>
+              <div class="mt-6 w-8 h-0.5 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a]"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="group relative" id="step-card-3">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 h-full hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+            <div class="flex flex-col items-center text-center h-full">
+              <div class="w-16 h-16 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mb-6 text-2xl font-bold text-[#181a20]">
+                03
+              </div>
+              <h3 class="text-xl font-bold text-[#ffb300] mb-4">Order & Enjoy</h3>
+              <p class="text-gray-300 flex-grow">Order your favorite meals and enjoy fast, safe delivery. Track your order in real-time.</p>
+              <div class="mt-6 w-8 h-0.5 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a]"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="group relative" id="step-card-4">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 h-full hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+            <div class="flex flex-col items-center text-center h-full">
+              <div class="w-16 h-16 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mb-6 text-2xl font-bold text-[#181a20]">
+                04
+              </div>
+              <h3 class="text-xl font-bold text-[#ffb300] mb-4">Rate & Earn</h3>
+              <p class="text-gray-300 flex-grow">Review your meals and earn points for free dishes and rewards! Build your foodie reputation.</p>
+              <div class="mt-6 w-8 h-0.5 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a]"></div>
+            </div>
+          </div>
+      </div>
+      </div>
+      
+      <!-- CTA Section -->
+      <div class="text-center mt-16">
+        <a href="mobile.html" class="inline-flex items-center gap-3 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:shadow-[#ffb300]/25 transition-all duration-300 transform hover:scale-105">
+          <span>Start Your Food Journey</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- Features Section -->
+  <section id="features" class="py-20 md:py-32 bg-gradient-to-br from-[#0f0f13] to-[#181a20]">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6">
+          <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+            Unify your food experience
+          </span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Single app for all your food needs. Discover, order, and earn rewards in one place.
+        </p>
+      </div>
+      
+      <div class="flex flex-col gap-20">
+        <!-- Feature 1 -->
+        <div class="group relative" id="feature-card-1">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 md:p-16 hover:border-[#ffb300]/40 transition-all duration-500">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+              <div class="flex-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-4 py-2 rounded-full text-sm mb-6">
+                  <span>🎯</span>
+                  <span>Smart Filtering</span>
+                </div>
+                <h3 class="text-3xl md:text-4xl font-extrabold mb-6">
+                  You evaluate, <span class="text-[#ff7a1a]">we dish out!</span>
+                </h3>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+                  Wander With Food believes that the best effort deserves the best reward. What better than giving you one of your favorite dishes? Get your food choices filtered - location-based and interest-based at your budget.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Location-based filtering</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Interest-based recommendations</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Budget-friendly options</span>
+                  </div>
+                </div>
+        </div>
+        <div class="flex-1 flex justify-center">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-20"></div>
+                  <img src="div0.png" alt="Smart Food Filtering" class="relative w-96 md:w-[500px] lg:w-[600px] rounded-2xl shadow-2xl" />
+        </div>
+      </div>
+        </div>
+      </div>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="group relative" id="feature-card-2">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 md:p-16 hover:border-[#ffb300]/40 transition-all duration-500">
+            <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+              <div class="flex-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-4 py-2 rounded-full text-sm mb-6">
+                  <span>⭐</span>
+                  <span>Rewards System</span>
+                </div>
+                <h3 class="text-3xl md:text-4xl font-extrabold mb-6">
+                  Rate a meal, <span class="text-[#ff7a1a]">get a deal!</span>
+                </h3>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+                  We believe in the power of reviews and we would be thrilled to pay you back for yours. Each review earns you one point. 30 points wins you a dish from any restaurant, absolutely free!
+                </p>
+                <div class="flex flex-wrap gap-4">
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Earn points for reviews</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Free dishes at 30 points</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Build foodie reputation</span>
+                  </div>
+                </div>
+        </div>
+        <div class="flex-1 flex justify-center">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-20"></div>
+                  <img src="div1.png" alt="Rewards System" class="relative w-96 md:w-[500px] lg:w-[600px] rounded-2xl shadow-2xl" />
+        </div>
+      </div>
+        </div>
+      </div>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="group relative" id="feature-card-3">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 md:p-16 hover:border-[#ffb300]/40 transition-all duration-500">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+              <div class="flex-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-4 py-2 rounded-full text-sm mb-6">
+                  <span>👨‍🍳</span>
+                  <span>Home Chefs</span>
+                </div>
+                <h3 class="text-3xl md:text-4xl font-extrabold mb-6">
+                  Customize your <span class="text-[#ff7a1a]">order!</span>
+                </h3>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+                  Find home-made cakes, pastries and lots of other delicious dishes served directly from the kitchens of unsung chefs. Support local talent and enjoy authentic homemade food.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Home-made specialties</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Custom orders</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#ffb300]">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Support local chefs</span>
+                  </div>
+                </div>
+        </div>
+        <div class="flex-1 flex justify-center">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-20"></div>
+                  <img src="div2.png" alt="Home Chefs" class="relative w-96 md:w-[500px] lg:w-[600px] rounded-2xl shadow-2xl" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About/Video Section -->
+  <section id="about" class="py-20 md:py-32 bg-gradient-to-br from-[#0f0f13] to-[#181a20]">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        <div class="flex-1 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-4 py-2 rounded-full text-sm mb-6">
+            <span>🎬</span>
+            <span>Watch Our Story</span>
+          </div>
+          <h2 class="text-4xl md:text-6xl font-extrabold mb-6">
+            <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+              Discover More With Us
+            </span>
+          </h2>
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Get your food choices filtered location-based and interest-based at your budget from over 1000+ dishes in our application. See how we're revolutionizing the food delivery experience.
+          </p>
+          <div class="flex flex-wrap gap-6 mb-8">
+            <div class="flex items-center gap-3 text-[#ffb300]">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-semibold">1000+ Dishes</span>
+            </div>
+            <div class="flex items-center gap-3 text-[#ffb300]">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-semibold">50+ Cities</span>
+            </div>
+            <div class="flex items-center gap-3 text-[#ffb300]">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-semibold">24/7 Support</span>
+            </div>
+          </div>
+
+    </div>
+    <div class="flex-1 flex justify-center">
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+            <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-2 hover:border-[#ffb300]/40 transition-all duration-500 transform hover:scale-105">
+              <div class="rounded-2xl overflow-hidden shadow-2xl w-full max-w-8xl aspect-video">
+                <iframe src="https://www.youtube.com/embed/mjVaDx2ZeSc" title="Wander With Food - Our Story" allowfullscreen class="w-full h-full"></iframe>
+              </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- District Explorer Section -->
+  <section id="district-explorer" class="py-20 md:py-32 bg-gradient-to-br from-[#181a20] to-[#0f0f13]">
+    <div class="container mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6">
+          <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+            Explore Districts
+          </span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Find the best restaurants in your district. Discover unique culinary experiences in each area.
+        </p>
+      <!-- Location Selector -->
+      <div class="group relative mb-12">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+        <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 hover:border-[#ffb300]/40 transition-all duration-500">
+          <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="flex-1 relative">
+              <input type="text" id="locationSearch" placeholder="Search for your district..." class="w-full bg-[#181a20]/50 border border-[#ffb300]/20 text-white rounded-xl px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:border-[#ffb300] transition-all duration-300 placeholder-gray-400" />
+              <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#ffb300]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <button onclick="detectLocation()" class="inline-flex items-center gap-3 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-[#ffb300]/25 transition-all duration-300 transform hover:scale-105">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>Use Current Location</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- District Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16" id="districtsGrid">
+        <div class="group relative district-card" onclick="selectDistrict('T. Nagar', 45)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🏪
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">T. Nagar</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">45 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('Anna Nagar', 38)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🏘️
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">Anna Nagar</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">38 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('Adyar', 52)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🌊
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">Adyar</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">52 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('Velachery', 29)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🏢
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">Velachery</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">29 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('Porur', 31)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🏭
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">Porur</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">31 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('Tambaram', 24)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🚂
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">Tambaram</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">24 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('ECR', 41)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🛣️
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">ECR</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">41 Restaurants</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative district-card" onclick="selectDistrict('Mylapore', 33)">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-6 hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                🏛️
+              </div>
+              <div class="district-name text-[#ffb300] font-bold text-lg">Mylapore</div>
+              <div class="district-restaurants text-gray-400 text-sm mt-1">33 Restaurants</div>
+            </div>
+          </div>
+        </div>
+    </div>
+      
+      <!-- Dynamic Restaurant Display -->
+      <div id="restaurants-display" class="space-y-16">
+        <!-- Content will be populated dynamically -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 md:py-32 bg-gradient-to-br from-[#181a20] to-[#0f0f13]">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6">
+          <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+            Contact Us
+          </span>
+        </h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Get in touch with our team. We're here to help you with any questions or support you need.
+        </p>
+        
+        <!-- Grievance Form Link -->
+        <div class="mt-8">
+          <a href="wwf_grievance_page.html" class="inline-flex items-center gap-3 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-white font-bold py-4 px-8 rounded-2xl hover:shadow-lg hover:shadow-[#ffb300]/25 transition-all duration-300 transform hover:scale-105">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            Submit Grievance Form
+          </a>
+        </div>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-16">
+        <!-- Contact Info -->
+        <div class="flex-1 space-y-8">
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-8 hover:border-[#ffb300]/40 transition-all duration-300">
+              <div class="flex items-start gap-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center text-2xl">
+                  📍
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-[#ffb300] mb-2">Our Location</h3>
+                  <div class="text-gray-300 leading-relaxed">
+            25/15, Teachers Colony 4th Street,<br>
+            Kumarananthapuram,<br>
+            Tirupur - 641 602,<br>
+            Tamil Nadu, India.
+          </div>
+        </div>
+        </div>
+            </div>
+          </div>
+          
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-8 hover:border-[#ffb300]/40 transition-all duration-300">
+              <div class="flex items-start gap-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] rounded-full flex items-center justify-center text-2xl">
+                  ✉️
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-[#ffb300] mb-2">Email Support</h3>
+                  <div class="text-gray-300">
+                    <a href="mailto:support@wanderwithfood.com" class="hover:text-[#ffb300] transition-colors duration-300">
+                      support@wanderwithfood.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl p-4 hover:border-[#ffb300]/40 transition-all duration-300">
+        <div class="rounded-xl overflow-hidden shadow-lg">
+                <iframe src="https://www.google.com/maps?q=Kumarananthapuram,+Tirupur,+Tamil+Nadu,+India&output=embed" allowfullscreen loading="lazy" class="w-full h-64"></iframe>
+        </div>
+      </div>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="flex-1">
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-3xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <div class="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 hover:border-[#ffb300]/40 transition-all duration-300">
+              <form class="flex flex-col gap-6" id="contact-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-[#ffb300] font-semibold mb-2">Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required class="w-full bg-[#181a20]/50 border border-[#ffb300]/20 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:border-[#ffb300] transition-all duration-300 placeholder-gray-400" />
+                  </div>
+                  <div>
+                    <label class="block text-[#ffb300] font-semibold mb-2">Email Address</label>
+                    <input type="email" placeholder="Enter your email" required class="w-full bg-[#181a20]/50 border border-[#ffb300]/20 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:border-[#ffb300] transition-all duration-300 placeholder-gray-400" />
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-[#ffb300] font-semibold mb-2">Phone Number</label>
+                    <input type="tel" placeholder="Enter your phone number" required class="w-full bg-[#181a20]/50 border border-[#ffb300]/20 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:border-[#ffb300] transition-all duration-300 placeholder-gray-400" />
+                  </div>
+                  <div>
+                    <label class="block text-[#ffb300] font-semibold mb-2">Address</label>
+                    <input type="text" placeholder="Enter your address" class="w-full bg-[#181a20]/50 border border-[#ffb300]/20 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:border-[#ffb300] transition-all duration-300 placeholder-gray-400" />
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="block text-[#ffb300] font-semibold mb-2">Message</label>
+                  <textarea placeholder="Tell us how we can help you..." rows="4" class="w-full bg-[#181a20]/50 border border-[#ffb300]/20 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:border-[#ffb300] transition-all duration-300 placeholder-gray-400 resize-none"></textarea>
+                </div>
+                
+                <button type="submit" class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#ffb300]/25 transition-all duration-300 transform hover:scale-105">
+                  Send Message
+                </button>
+      </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <!-- Footer Section -->
+  <div class="bg-gradient-to-br from-[#0f0f13] to-[#181a20] border-t border-[#292a2f]/50 py-16">
+    <div class="container mx-auto px-6">
+      
+      <!-- Footer Content -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <img src="WWF Logo.png" alt="Wander With Food" class="h-8 w-auto" />
+            <span class="text-xl font-bold text-[#ffb300]">Wander With Food</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Your trusted partner for discovering and ordering delicious food from local restaurants and home chefs.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-[#ffb300] font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#hero" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">Home</a></li>
+            <li><a href="#features" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">Features</a></li>
+            <li><a href="#steps" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">How it Works</a></li>
+            <li><a href="#testimonials" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">Reviews</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-[#ffb300] font-bold mb-4">Support</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#contact" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">Contact Us</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">Help Center</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">FAQ</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-[#ffb300] transition-colors duration-300">Privacy Policy</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-[#ffb300] font-bold mb-4">Connect</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-[#23242a] rounded-full flex items-center justify-center text-[#ffb300] hover:bg-[#ffb300] hover:text-[#181a20] transition-all duration-300">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 bg-[#23242a] rounded-full flex items-center justify-center text-[#ffb300] hover:bg-[#ffb300] hover:text-[#181a20] transition-all duration-300">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 bg-[#23242a] rounded-full flex items-center justify-center text-[#ffb300] hover:bg-[#ffb300] hover:text-[#181a20] transition-all duration-300">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Copyright -->
+      <div class="border-t border-[#292a2f]/50 pt-8 text-center">
+        <div class="text-gray-400 text-sm">
+          Copyright © 2024 Wander With Food | All rights reserved.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- GSAP Animations -->
+  <script>
+
+    // GSAP + ScrollTrigger Animations
+    window.addEventListener('DOMContentLoaded', function() {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Hero Section Animations
+      gsap.from('#hero-left', { 
+        opacity: 0, 
+        x: -100, 
+        duration: 1.2, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#hero', start: 'top 80%' } 
+      });
+      
+      gsap.from('#hero-right', { 
+        opacity: 0, 
+        scale: 0.6, 
+        duration: 1.2, 
+        delay: 0.3, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#hero', start: 'top 80%' } 
+      });
+      
+      // Stats Counter Animation
+      gsap.from('#hero-left .text-center', { 
+        opacity: 0, 
+        y: 30, 
+        duration: 0.8, 
+        delay: 0.8, 
+        ease: 'power2.out', 
+        scrollTrigger: { trigger: '#hero', start: 'top 80%' } 
+      });
+      
+      // Steps Section Animations
+      [1,2,3,4].forEach(i => {
+        gsap.from(`#step-card-${i}`, { 
+          opacity: 0, 
+          y: 80, 
+          duration: 1, 
+          delay: i*0.15, 
+          ease: 'power3.out', 
+          scrollTrigger: { trigger: `#step-card-${i}`, start: 'top 90%' } 
+        });
+      });
+      
+      // Features Section Animations
+      [1,2,3].forEach(i => {
+        gsap.from(`#feature-card-${i}`, { 
+          opacity: 0, 
+          y: 100, 
+          duration: 1.2, 
+          delay: i*0.2, 
+          ease: 'power3.out', 
+          scrollTrigger: { trigger: `#feature-card-${i}`, start: 'top 85%' } 
+        });
+      });
+      
+      // Testimonials Section Animations
+      [1,2,3,4].forEach(i => {
+        gsap.from(`#testimonial-card-${i}`, { 
+          opacity: 0, 
+          y: 60, 
+          scale: 0.9,
+          duration: 1, 
+          delay: i*0.1, 
+          ease: 'power3.out', 
+          scrollTrigger: { trigger: `#testimonial-card-${i}`, start: 'top 90%' } 
+        });
+      });
+      
+      // About Section Animations
+      gsap.from('#about .flex-1:first-child', { 
+        opacity: 0, 
+        x: -60, 
+        duration: 1, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#about', start: 'top 85%' } 
+      });
+      
+      gsap.from('#about .flex-1:last-child', { 
+        opacity: 0, 
+        x: 60, 
+        duration: 1, 
+        delay: 0.2, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#about', start: 'top 85%' } 
+      });
+      
+      // Featured Restaurants Section Animations
+      gsap.from('#featured-restaurants .text-center', { 
+        opacity: 0, 
+        y: 60, 
+        duration: 1, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#featured-restaurants', start: 'top 85%' } 
+      });
+      
+      // Restaurant section animations
+      gsap.from('#restaurant-section-1', { 
+        opacity: 0, 
+        x: -60, 
+        duration: 1, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#restaurant-section-1', start: 'top 85%' } 
+      });
+      
+      gsap.from('#restaurant-section-2', { 
+        opacity: 0, 
+        x: 60, 
+        duration: 1, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#restaurant-section-2', start: 'top 85%' } 
+      });
+      
+      gsap.from('#restaurant-section-3', { 
+        opacity: 0, 
+        x: -60, 
+        duration: 1, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#restaurant-section-3', start: 'top 85%' } 
+      });
+      
+      // Contact Section Animations
+      gsap.from('#contact .flex-1:first-child', { 
+        opacity: 0, 
+        x: -60, 
+        duration: 1, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#contact', start: 'top 85%' } 
+      });
+      
+      gsap.from('#contact .flex-1:last-child', { 
+        opacity: 0, 
+        x: 60, 
+        duration: 1, 
+        delay: 0.2, 
+        ease: 'power3.out', 
+        scrollTrigger: { trigger: '#contact', start: 'top 85%' } 
+      });
+      
+      // Floating Animation for Hero Image
+      gsap.to('#hero-right img', {
+        y: -20,
+        duration: 3,
+        ease: 'power2.inOut',
+        yoyo: true,
+        repeat: -1
+      });
+      
+      // Parallax Effect for Background Elements
+      gsap.to('#hero .absolute', {
+        y: -50,
+        duration: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    });
+    // Restaurant section interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click handlers for the explore buttons
+      const exploreButtons = document.querySelectorAll('#featured-restaurants button');
+      exploreButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Add a subtle animation effect
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 150);
+          
+          // You can add navigation logic here
+          console.log('Explore button clicked:', this.textContent.trim());
+        });
+      });
+      
+      // Scroll down functionality
+      const scrollDownBtn = document.getElementById('scrollDown');
+      if (scrollDownBtn) {
+        scrollDownBtn.addEventListener('click', function() {
+          const nextSection = document.getElementById('steps');
+          if (nextSection) {
+            nextSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      }
+      
+      // Smooth scroll for all navigation links
+      const navLinks = document.querySelectorAll('a[href^="#"]');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            targetSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+    
+    // Contact form demo
+    document.getElementById('contact-form').onsubmit = function(e) {
+      e.preventDefault();
+      alert('Thank you for contacting us! (Demo only)');
+    };
+  </script>
+  <script>
+    document.getElementById('mobileMenuBtn').onclick = function() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    };
+  </script>
+  
+  <!-- District Selector JavaScript -->
+  <script>
+    // District data with restaurant information
+    const districtData = {
+              'T. Nagar': {
+          mustTry: [
+            { name: 'Butter Chicken', restaurant: 'Spice Garden', rating: 4.5, price: '₹350', image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Biryani', restaurant: 'Royal Kitchen', rating: 4.3, price: '₹280', image: 'https://images.unsplash.com/photo-1563379091339-03246963d4a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Tandoori Roti', restaurant: 'Delhi Darbar', rating: 4.4, price: '₹120', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+          ],
+        restaurants: [
+          { name: 'Spice Garden', cuisine: 'North Indian', rating: 4.5, delivery: '30-45 min' },
+          { name: 'Royal Kitchen', cuisine: 'Mughlai', rating: 4.3, delivery: '25-40 min' },
+          { name: 'Delhi Darbar', cuisine: 'North Indian', rating: 4.4, delivery: '20-35 min' },
+          { name: 'Chennai Express', cuisine: 'South Indian', rating: 4.2, delivery: '15-30 min' }
+        ],
+        ambience: [
+          { name: 'Spice Garden', rating: 4.6, feature: 'Fine Dining', price: '₹₹₹' },
+          { name: 'Royal Kitchen', rating: 4.4, feature: 'Traditional', price: '₹₹' },
+          { name: 'Delhi Darbar', rating: 4.3, feature: 'Casual', price: '₹₹' },
+          { name: 'Luxury Lounge', rating: 4.7, feature: 'Premium', price: '₹₹₹' }
+        ]
+      },
+              'Anna Nagar': {
+          mustTry: [
+            { name: 'Masala Dosa', restaurant: 'Saravana Bhavan', rating: 4.6, price: '₹180', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Filter Coffee', restaurant: 'Café Coffee Day', rating: 4.4, price: '₹120', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Veg Thali', restaurant: 'Annamalai Mess', rating: 4.3, price: '₹200', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+          ],
+        restaurants: [
+          { name: 'Saravana Bhavan', cuisine: 'South Indian', rating: 4.6, delivery: '20-35 min' },
+          { name: 'Café Coffee Day', cuisine: 'Beverages', rating: 4.4, delivery: '15-25 min' },
+          { name: 'Annamalai Mess', cuisine: 'South Indian', rating: 4.3, delivery: '25-40 min' },
+          { name: 'Pizza Corner', cuisine: 'Italian', rating: 4.1, delivery: '30-45 min' }
+        ],
+        ambience: [
+          { name: 'Saravana Bhavan', rating: 4.5, feature: 'Family Restaurant', price: '₹₹' },
+          { name: 'Café Coffee Day', rating: 4.3, feature: 'Modern Café', price: '₹₹' },
+          { name: 'Annamalai Mess', rating: 4.2, feature: 'Traditional', price: '₹' },
+          { name: 'Urban Bistro', rating: 4.6, feature: 'Contemporary', price: '₹₹₹' }
+        ]
+      },
+              'Adyar': {
+          mustTry: [
+            { name: 'Seafood Curry', restaurant: 'Coastal Kitchen', rating: 4.7, price: '₹450', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Fish Fry', restaurant: 'Marine Delight', rating: 4.5, price: '₹380', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Crab Masala', restaurant: 'Ocean View', rating: 4.6, price: '₹520', image: 'https://images.unsplash.com/photo-1563379091339-03246963d4a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+          ],
+        restaurants: [
+          { name: 'Coastal Kitchen', cuisine: 'Seafood', rating: 4.7, delivery: '35-50 min' },
+          { name: 'Marine Delight', cuisine: 'Seafood', rating: 4.5, delivery: '30-45 min' },
+          { name: 'Ocean View', cuisine: 'Seafood', rating: 4.6, delivery: '40-55 min' },
+          { name: 'Beach House', cuisine: 'Continental', rating: 4.3, delivery: '25-40 min' }
+        ],
+        ambience: [
+          { name: 'Coastal Kitchen', rating: 4.6, feature: 'Beach View', price: '₹₹₹' },
+          { name: 'Marine Delight', rating: 4.4, feature: 'Casual Dining', price: '₹₹' },
+          { name: 'Ocean View', rating: 4.5, feature: 'Premium', price: '₹₹₹' },
+          { name: 'Seaside Lounge', rating: 4.3, feature: 'Waterfront', price: '₹₹₹' }
+        ]
+      },
+              'Velachery': {
+          mustTry: [
+            { name: 'Chicken 65', restaurant: 'Spice Junction', rating: 4.4, price: '₹280', image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Gobi Manchurian', restaurant: 'Chinese Wok', rating: 4.2, price: '₹220', image: 'https://images.unsplash.com/photo-1563379091339-03246963d4a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+            { name: 'Paneer Tikka', restaurant: 'Veg Paradise', rating: 4.3, price: '₹260', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+          ],
+        restaurants: [
+          { name: 'Spice Junction', cuisine: 'Indo-Chinese', rating: 4.4, delivery: '25-40 min' },
+          { name: 'Chinese Wok', cuisine: 'Chinese', rating: 4.2, delivery: '20-35 min' },
+          { name: 'Veg Paradise', cuisine: 'Vegetarian', rating: 4.3, delivery: '15-30 min' },
+          { name: 'Fast Food Hub', cuisine: 'Fast Food', rating: 4.0, delivery: '10-25 min' }
+        ],
+        ambience: [
+          { name: 'Spice Junction', rating: 4.3, feature: 'Modern', price: '₹₹' },
+          { name: 'Chinese Wok', rating: 4.1, feature: 'Casual', price: '₹₹' },
+          { name: 'Veg Paradise', rating: 4.2, feature: 'Family', price: '₹₹' },
+          { name: 'Fusion Hub', rating: 4.4, feature: 'Contemporary', price: '₹₹₹' }
+        ]
+      },
+      'Porur': {
+        mustTry: [
+          { name: 'Mutton Biryani', restaurant: 'Biryani House', rating: 4.5, price: '₹320', image: 'https://images.unsplash.com/photo-1563379091339-03246963d4a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Kebab Platter', restaurant: 'Kebab Corner', rating: 4.3, price: '₹380', image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Shawarma', restaurant: 'Arabian Nights', rating: 4.2, price: '₹180', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+        ],
+        restaurants: [
+          { name: 'Biryani House', cuisine: 'Mughlai', rating: 4.5, delivery: '30-45 min' },
+          { name: 'Kebab Corner', cuisine: 'Mughlai', rating: 4.3, delivery: '25-40 min' },
+          { name: 'Arabian Nights', cuisine: 'Arabian', rating: 4.2, delivery: '20-35 min' },
+          { name: 'Dessert Corner', cuisine: 'Desserts', rating: 4.1, delivery: '15-30 min' }
+        ],
+        ambience: [
+          { name: 'Biryani House', rating: 4.4, feature: 'Traditional', price: '₹₹' },
+          { name: 'Kebab Corner', rating: 4.2, feature: 'Casual', price: '₹₹' },
+          { name: 'Arabian Nights', rating: 4.1, feature: 'Themed', price: '₹₹' },
+          { name: 'Royal Palace', rating: 4.5, feature: 'Luxury', price: '₹₹₹' }
+        ]
+      },
+      'Tambaram': {
+        mustTry: [
+          { name: 'Railway Curry', restaurant: 'Station Kitchen', rating: 4.3, price: '₹250', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Veg Meals', restaurant: 'Mess Corner', rating: 4.1, price: '₹180', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Tea & Snacks', restaurant: 'Railway Café', rating: 4.2, price: '₹120', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+        ],
+        restaurants: [
+          { name: 'Station Kitchen', cuisine: 'South Indian', rating: 4.3, delivery: '20-35 min' },
+          { name: 'Mess Corner', cuisine: 'South Indian', rating: 4.1, delivery: '15-30 min' },
+          { name: 'Railway Café', cuisine: 'Beverages', rating: 4.2, delivery: '10-25 min' },
+          { name: 'Fast Bites', cuisine: 'Fast Food', rating: 4.0, delivery: '15-30 min' }
+        ],
+        ambience: [
+          { name: 'Station Kitchen', rating: 4.2, feature: 'Casual', price: '₹' },
+          { name: 'Mess Corner', rating: 4.0, feature: 'Simple', price: '₹' },
+          { name: 'Railway Café', rating: 4.1, feature: 'Quick Service', price: '₹' },
+          { name: 'Traveler\'s Rest', rating: 4.3, feature: 'Comfort', price: '₹₹' }
+        ]
+      },
+      'ECR': {
+        mustTry: [
+          { name: 'Beach Fish Curry', restaurant: 'Coastal Delight', rating: 4.6, price: '₹420', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Prawn Masala', restaurant: 'Seafood Paradise', rating: 4.5, price: '₹480', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Coconut Rice', restaurant: 'Beach House', rating: 4.4, price: '₹280', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+        ],
+        restaurants: [
+          { name: 'Coastal Delight', cuisine: 'Seafood', rating: 4.6, delivery: '40-55 min' },
+          { name: 'Seafood Paradise', cuisine: 'Seafood', rating: 4.5, delivery: '35-50 min' },
+          { name: 'Beach House', cuisine: 'Continental', rating: 4.4, delivery: '30-45 min' },
+          { name: 'Sunset Café', cuisine: 'Café', rating: 4.3, delivery: '25-40 min' }
+        ],
+        ambience: [
+          { name: 'Coastal Delight', rating: 4.5, feature: 'Beachfront', price: '₹₹₹' },
+          { name: 'Seafood Paradise', rating: 4.4, feature: 'Premium', price: '₹₹₹' },
+          { name: 'Beach House', rating: 4.3, feature: 'Casual', price: '₹₹' },
+          { name: 'Ocean Breeze', rating: 4.6, feature: 'Seaside', price: '₹₹₹' }
+        ]
+      },
+      'Mylapore': {
+        mustTry: [
+          { name: 'Filter Coffee', restaurant: 'Traditional Café', rating: 4.7, price: '₹80', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Idli Sambar', restaurant: 'Heritage Kitchen', rating: 4.5, price: '₹120', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+          { name: 'Pongal', restaurant: 'Temple Kitchen', rating: 4.4, price: '₹150', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+        ],
+        restaurants: [
+          { name: 'Traditional Café', cuisine: 'South Indian', rating: 4.7, delivery: '15-30 min' },
+          { name: 'Heritage Kitchen', cuisine: 'South Indian', rating: 4.5, delivery: '20-35 min' },
+          { name: 'Temple Kitchen', cuisine: 'South Indian', rating: 4.4, delivery: '25-40 min' },
+          { name: 'Modern Bites', cuisine: 'Fusion', rating: 4.2, delivery: '30-45 min' }
+        ],
+        ambience: [
+          { name: 'Traditional Café', rating: 4.6, feature: 'Heritage', price: '₹₹' },
+          { name: 'Heritage Kitchen', rating: 4.4, feature: 'Traditional', price: '₹₹' },
+          { name: 'Temple Kitchen', rating: 4.3, feature: 'Simple', price: '₹' },
+          { name: 'Cultural Corner', rating: 4.5, feature: 'Authentic', price: '₹₹' }
+        ]
+      }
+    };
+
+    // Function to select a district
+    function selectDistrict(districtName, restaurantCount) {
+      // Remove active class from all district cards
+      document.querySelectorAll('.district-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      
+      // Add active class to selected district card
+      event.currentTarget.classList.add('selected');
+      
+      // Get district data
+      const district = districtData[districtName];
+      if (!district) return;
+      
+      // Update the display
+      displayDistrictRestaurants(districtName, district);
+    }
+
+    // Function to display district restaurants
+    function displayDistrictRestaurants(districtName, district) {
+      const displayDiv = document.getElementById('restaurants-display');
+      
+            displayDiv.innerHTML = `
+        <!-- Restaurants Section -->
+        <div class="group relative">
+          <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 md:p-16 hover:border-[#ffb300]/40 transition-all duration-500">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl md:text-4xl font-extrabold mb-4">
+                <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+                  Restaurants in ${districtName}
+                </span>
+              </h3>
+              <p class="text-lg text-gray-300">Explore the best restaurants and their specialties</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              ${district.restaurants.map(restaurant => `
+                <div class="group relative">
+                  <div class="relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+                    <!-- Restaurant Image -->
+                    <div class="relative h-32 bg-gradient-to-br from-[#ffb300]/20 to-[#ff7a1a]/20">
+                      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="${restaurant.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <!-- Restaurant Info -->
+                    <div class="p-4 bg-white">
+                      <h4 class="text-[#181a20] font-bold text-lg mb-2">${restaurant.name}</h4>
+                      <p class="text-gray-600 text-sm mb-2">${restaurant.cuisine}</p>
+                      <div class="flex items-center justify-center gap-2 mb-3">
+                        <div class="flex text-[#ffb300]">
+                          ${'★'.repeat(Math.floor(restaurant.rating))}${'☆'.repeat(5-Math.floor(restaurant.rating))}
+                        </div>
+                        <span class="text-gray-500 text-sm">${restaurant.rating}</span>
+                      </div>
+                      <div class="text-gray-500 text-sm text-center">${restaurant.delivery}</div>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            
+            <!-- See All Button for Restaurants -->
+            <div class="text-center mt-8">
+              <button class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-white font-bold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                See All
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Ambience Section -->
+        <div class="group relative">
+          <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 md:p-16 hover:border-[#ffb300]/40 transition-all duration-500">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl md:text-4xl font-extrabold mb-4">
+                <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+                  Featured Restaurants in ${districtName} – Best in Ambience
+                </span>
+              </h3>
+              <p class="text-lg text-gray-300">Experience the best dining atmosphere and ambiance</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              ${district.ambience.map(restaurant => `
+                <div class="group relative">
+                  <div class="relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+                    <!-- Restaurant Image -->
+                    <div class="relative h-32 bg-gradient-to-br from-[#ffb300]/20 to-[#ff7a1a]/20">
+                      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="${restaurant.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <!-- Restaurant Info -->
+                    <div class="p-4 bg-white">
+                      <h4 class="text-[#181a20] font-bold text-lg mb-2">${restaurant.name}</h4>
+                      <p class="text-gray-600 text-sm mb-2">${restaurant.feature}</p>
+                      <div class="flex items-center justify-center gap-2 mb-3">
+                        <div class="flex text-[#ffb300]">
+                          ${'★'.repeat(Math.floor(restaurant.rating))}${'☆'.repeat(5-Math.floor(restaurant.rating))}
+                        </div>
+                        <span class="text-gray-500 text-sm">${restaurant.rating}</span>
+                      </div>
+                      <div class="text-[#ffb300] font-bold text-center">${restaurant.price}</div>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            
+            <!-- See All Button for Ambience -->
+            <div class="text-center mt-8">
+              <button class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-white font-bold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                See All
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Must Try Dishes Section -->
+        <div class="group relative">
+          <div class="relative bg-[#23242a]/60 backdrop-blur-sm border border-[#ffb300]/20 rounded-3xl p-8 md:p-16 hover:border-[#ffb300]/40 transition-all duration-500">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl md:text-4xl font-extrabold mb-4">
+                <span class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] bg-clip-text text-transparent">
+                  Featured Restaurants in ${districtName} – Must Try Dishes
+                </span>
+              </h3>
+              <p class="text-lg text-gray-300">Discover the most popular and highly-rated dishes in ${districtName}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${district.mustTry.map(dish => `
+                <div class="group relative">
+                  <div class="relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#ffb300]/40 transition-all duration-300 transform hover:scale-105">
+                    <!-- Dish Image -->
+                    <div class="relative h-48 bg-gradient-to-br from-[#ffb300]/20 to-[#ff7a1a]/20">
+                      <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <!-- Dish Info -->
+                    <div class="p-6 bg-white">
+                      <h4 class="text-[#181a20] font-bold text-xl mb-2">${dish.name}</h4>
+                      <p class="text-gray-600 text-sm mb-3 font-medium">${dish.restaurant}</p>
+                      <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                          <div class="flex text-[#ffb300]">
+                            ${'★'.repeat(Math.floor(dish.rating))}${'☆'.repeat(5-Math.floor(dish.rating))}
+                          </div>
+                          <span class="text-gray-500 text-sm font-medium">${dish.rating}</span>
+                        </div>
+                        <div class="text-[#ffb300] font-bold text-lg">${dish.price}</div>
+                      </div>
+                      <button class="w-full bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-white font-bold py-3 px-4 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Order Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            
+            <!-- See All Button for Must Try Dishes -->
+            <div class="text-center mt-8">
+              <button class="bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-white font-bold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                See All
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Scroll to the display section
+      displayDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Function to detect current location
+    function detectLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            // For demo purposes, we'll just show a message
+            alert('Location detected! We\'ll show you restaurants near your current location.');
+            // In a real app, you would use the coordinates to find the nearest district
+            // and automatically select it
+          },
+          function(error) {
+            alert('Unable to detect your location. Please select a district manually.');
+          }
+        );
+      } else {
+        alert('Geolocation is not supported by this browser. Please select a district manually.');
+      }
+    }
+
+    // Search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('locationSearch');
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const districtCards = document.querySelectorAll('.district-card');
+          
+          districtCards.forEach(card => {
+            const districtName = card.querySelector('.district-name').textContent.toLowerCase();
+            if (districtName.includes(searchTerm)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

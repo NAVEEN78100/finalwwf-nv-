@@ -1,0 +1,425 @@
+﻿:root {
+    --jeton-orange: #FF9316;
+    --brand-yellow: #FFD700;
+    --brand-dark-yellow: #FFC700;
+    --brand-white: #fff;
+    --brand-gray-dark: #383838;
+    --brand-text: #fff; /* <-- CHANGED to white for contrast */
+    --field-bg: #1c1c1c; /* <-- subtle dark for field bg */
+    --field-border: #232323;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: #000; /* <-- BLACK BACKGROUND */
+    color: var(--brand-text); /* <-- Make default text white */
+    margin: 0;
+    padding: 0;
+}
+
+/* Orange header section - covers logo through heading */
+.jeton-orange-header {
+    width: 100%;
+    background: #f63636; /* This is the strong red from your image */
+    padding-bottom: 0;
+}
+
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1.5rem 0 0.5rem 2rem;
+}
+
+.wwf-logo {
+    height: 62px;
+    width: auto;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    object-fit: contain;
+}
+
+/* Hero section - inherits orange from parent */
+.hero {
+    background: none !important;
+    color: #252525;
+    min-height: 200px;
+    padding: 1.2rem 1.6rem 2.2rem 1.6rem;
+    text-align: center;
+}
+
+    .hero h1, .hero p {
+        color: #252525;
+    }
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* BLACK background for form area below the hero */
+.grievance-form {
+    padding: 3rem 1.5rem;
+    background: #000; /* <-- BLACK */
+}
+
+/* Form Styling: keep wrapper white, or switch to dark for full-black look */
+.form-wrapper {
+    background: #181818; /* <-- DARK card; can use #fff for white form card */
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+    .form-wrapper h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--brand-yellow); /* Jeton yellow for accent heading if you like */
+    }
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+    /* Jeton orange field headings */
+    .form-group label,
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+        color: var(--jeton-orange);
+        font-size: 1rem;
+        letter-spacing: 0.01em;
+    }
+
+.required-star {
+    color: #e13030;
+    margin-left: 2px;
+    font-size: 1.1em;
+}
+
+/* Dark, filled, rounded modern input fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 1.1rem 1.4rem;
+    font-size: 1.08rem;
+    border: none;
+    outline: none;
+    background: var(--field-bg); /* dark bg */
+    border-radius: 1.1rem;
+    box-shadow: 0 2px 16px 0 rgba(44, 44, 44, 0.17);
+    color: #fafafa;
+    font-family: inherit;
+    margin-bottom: 1.05rem;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+    display: block;
+    box-sizing: border-box;
+}
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        background: #222;
+        box-shadow: 0 0 0 3px rgba(255,147,22,0.22);
+        border: 1.5px solid var(--jeton-orange);
+    }
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px #232323 inset !important;
+    box-shadow: 0 0 0 100px #232323 inset !important;
+    color: #fafafa !important;
+}
+
+::placeholder {
+    color: #aaa;
+    opacity: 1;
+}
+
+input[readonly] {
+    background: #161616;
+    color: #bbb;
+    font-weight: 600;
+}
+
+/* 2-column fields for full name + contact, state + location */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+    .form-row .form-group {
+        width: 100%;
+    }
+
+/* Checkbox styling */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 1.5rem 0;
+}
+
+    .checkbox-group input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: 2px;
+        accent-color: var(--jeton-orange);
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .checkbox-group label {
+        font-size: 14px;
+        line-height: 1.5;
+        cursor: pointer;
+        color: #f4f4f4;
+        font-weight: 500;
+    }
+
+.policies-link {
+    color: var(--jeton-orange);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+    .policies-link:hover {
+        color: var(--brand-yellow);
+    }
+
+/* Button Styling */
+.btn-primary,
+.jeton-send-btn {
+    background: linear-gradient(90deg, #FF9316 60%, #FFC700 100%);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.15rem;
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 4px 24px rgba(255, 147, 22, 0.15);
+    text-transform: uppercase;
+    width: 100%;
+    max-width: 320px;
+    cursor: pointer;
+    transition: background 0.16s, transform 0.16s, box-shadow 0.16s;
+}
+
+    .btn-primary:hover,
+    .jeton-send-btn:hover {
+        background: linear-gradient(90deg, #FF9316 40%, #FFC700 100%);
+        box-shadow: 0 6px 32px rgba(255, 147, 22, 0.24);
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:disabled,
+    .jeton-send-btn:disabled {
+        background: #444;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+    }
+
+.status-msg {
+    margin-top: 0.8rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #f54;
+}
+
+
+
+/* Drawer / Modal */
+.policies-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: #fff;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+    .policies-drawer.open {
+        display: flex;
+    }
+
+.policies-drawer-header {
+    background: var(--jeton-orange);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .policies-drawer-header h3 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--brand-gray-dark);
+        margin: 0;
+    }
+
+.policies-drawer-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--brand-gray-dark);
+}
+
+.policies-drawer-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+    .policies-drawer-body ul {
+        padding-left: 1.8rem;
+    }
+
+    .policies-drawer-body li {
+        margin-bottom: 0.8rem;
+    }
+
+.policies-drawer-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 19999;
+    display: none;
+}
+
+    .backdrop.show {
+        display: block;
+    }
+
+/* Confirmation Modal */
+.confirmation-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+    .confirmation-modal.show {
+        display: flex;
+    }
+
+.modal-content {
+    background: #fff;
+    border-radius: 1.5rem;
+    max-width: 500px;
+    width: 90%;
+    padding: 2rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: var(--brand-gray-dark);
+    }
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--brand-text);
+}
+
+    .modal-body ul {
+        padding-left: 1.5rem;
+    }
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(56, 56, 56, 0.3);
+    border-top-color: var(--brand-gray-dark);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .logo-container {
+        padding: 1.1rem 0 0.4rem 1rem;
+    }
+
+    .wwf-logo {
+        height: 44px;
+    }
+}
+/* Ensure autofill text is white and matches field style */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: #fafafa !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+.policies-drawer-body {
+    color: #232323 !important; /* Makes text dark for readability */
+}
+
+    .policies-drawer-body a {
+        color: #0055cc !important; /* Makes links visible and blue */
+    }
+
+
+.confirmation-modal .modal-body,
+.confirmation-modal .modal-header {
+    color: #232323 !important;
+}

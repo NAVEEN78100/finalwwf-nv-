@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/company/exported-assets/static/css/main.982cefdb.css",
+    "main.js": "/company/exported-assets/static/js/main.b7227a41.js",
+    "index.html": "/company/exported-assets/index.html",
+    "main.982cefdb.css.map": "/company/exported-assets/static/css/main.982cefdb.css.map",
+    "main.b7227a41.js.map": "/company/exported-assets/static/js/main.b7227a41.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.982cefdb.css",
+    "static/js/main.b7227a41.js"
+  ]
+}

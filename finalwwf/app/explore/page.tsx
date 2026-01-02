@@ -1,0 +1,465 @@
+"use client"
+
+import { useRef, useState, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { MapPin, Clock, ChevronLeft, Star } from 'lucide-react'
+import ScrollVelocity from '@/components/ScrollVelocity'
+
+export default function ExplorePage() {
+  const [ripple, setRipple] = useState<{x: number, y: number, key: string} | null>(null)
+  const router = useRouter()
+
+  const [districts, setDistricts] = useState<any[]>([])
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null)
+  const [displayDistrict, setDisplayDistrict] = useState<string>('')
+  const restaurantSectionRef = useRef<HTMLDivElement>(null)
+
+  const [restaurants, setRestaurants] = useState<any[]>([])
+  const [featuredAmbience, setFeaturedAmbience] = useState<any[]>([])
+  const [featuredDishes, setFeaturedDishes] = useState<any[]>([])
+
+  const [searchQuery, setSearchQuery] = useState<string>('')
+
+  useEffect(() => {
+    const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+    fetch(base + '/explore/districts')
+      .then((r) => r.json())
+      .then((data) => { if (data?.districts) setDistricts(data.districts) })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setRestaurants([])
+      setFeaturedAmbience([])
+      setFeaturedDishes([])
+      setDisplayDistrict('')
+      return
+    }
+    const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+    const url = base + '/api/explore/' + encodeURIComponent(selectedDistrict)
+    fetch(url)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.ok) {
+          setRestaurants(data.restaurants || [])
+          setFeaturedAmbience(data.featuredAmbience || [])
+          setFeaturedDishes(data.featuredDishes || [])
+          setDisplayDistrict(data.district || selectedDistrict)
+        }
+      })
+      .catch(() => {})
+  }, [selectedDistrict])
+
+  const filteredRestaurants = restaurants.filter((r) => {
+    const q = searchQuery.trim().toLowerCase()
+    return (
+      q === '' ||
+      (r.name || '').toLowerCase().includes(q) ||
+      ((r.cuisine || '') as string).toLowerCase().includes(q)
+    )
+  })
+
+  const restaurantLogos = [
+    { name: 'SSL', logo: '🍛' },
+    { name: 'TSC', logo: '☕' },
+    { name: 'DD', logo: '🥞' },
+    { name: 'UG', logo: '🍖' },
+    { name: 'SM', logo: '🍲' },
+    { name: 'CC', logo: '🦞' },
+    { name: 'MB', logo: '🌮' },
+    { name: 'CCH', logo: '🍲' },
+    { name: 'TMM', logo: '🫓' },
+    { name: 'TT', logo: '�' },
+    { name: 'SS', logo: '🍰' },
+    { name: 'CCC', logo: '☕' },
+    { name: 'TNT', logo: '🥞' },
+    { name: 'TNB', logo: '☕' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#181a20] to-[#0f0f13]">
+      {/* WWF Landing Section */}
+      <div className="relative bg-gradient-to-br from-[#0a1628] via-[#1a365d] to-[#2d3748] py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] bg-cover mix-blend-overlay opacity-10"></div>
+        
+        {/* Background decorative circles */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+            <div className="md:max-w-xl">
+              <Button variant="ghost" size="sm" onClick={() => router.push('/')} className="mb-6 hover:bg-white/10 text-white">
+                <ChevronLeft className="w-4 h-4 mr-2" />
+                <span>Back to Home</span>
+              </Button>
+              <h1 className="text-left text-4xl md:text-6xl font-extrabold leading-tight text-white">
+                Where the World
+                <br />
+                Finds Food
+              </h1>
+            </div>
+
+            <div className="md:max-w-md md:pt-12 text-left md:text-right">
+              <p className="text-base md:text-[15px] leading-relaxed text-white/80">
+                Discover authentic local restaurants paired with strong curation and delightful experiences.
+                Manage your food journey confidently and securely.
+              </p>
+              <div className="mt-4 flex md:justify-end">
+                <Button size="sm" className="bg-white/20 hover:bg-white/30 text-white rounded-full px-4 py-2">
+                  Explore Now
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Single translucent stats panel */}
+          <div className="mt-10 mx-auto max-w-3xl rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md shadow-xl p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-5xl font-bold text-white">{districts.length || 26}<span className="text-white/70">+</span></div>
+                <div className="mt-3 inline-block px-4 py-1 rounded-full text-xs font-semibold bg-sky-300/30 text-white border border-white/30">Districts</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold text-white">150<span className="text-white/70">+</span></div>
+                <div className="mt-3 inline-block px-4 py-1 rounded-full text-xs font-semibold bg-sky-300/30 text-white border border-white/30">Restaurants</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold text-white">80<span className="text-white/70">+</span></div>
+                <div className="mt-3 inline-block px-4 py-1 rounded-full text-xs font-semibold bg-sky-300/30 text-white border border-white/30">Cuisines</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Auto-scrolling restaurant logos - similar to country flags */}
+        <div className="mt-16 pb-8 space-y-4">
+          {/* First row - scrolls left to right */}
+          <div className="overflow-hidden relative">
+            <div className="flex gap-3 animate-scroll-rtl">
+              {[...restaurantLogos, ...restaurantLogos, ...restaurantLogos, ...restaurantLogos].map((r, idx) => (
+                <div
+                  key={`rtl-${r.name}-${idx}`}
+                  className="inline-flex items-center gap-2 px-4 h-12 min-w-[92px] bg-transparent rounded-xl hover:scale-105 transition-transform flex-shrink-0 border border-white/40 text-white"
+                >
+                  <span className="text-2xl leading-none">{r.logo}</span>
+                  <span className="text-sm font-semibold tracking-wide">
+                    {(r.name || '').toUpperCase().slice(0, 7)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Second row - scrolls right to left */}
+          <div className="overflow-hidden relative">
+            <div className="flex gap-3 animate-scroll-ltr">
+              {[...restaurantLogos, ...restaurantLogos, ...restaurantLogos, ...restaurantLogos].reverse().map((r, idx) => (
+                <div
+                  key={`ltr-${r.name}-${idx}`}
+                  className="inline-flex items-center gap-2 px-4 h-12 min-w-[92px] bg-transparent rounded-xl hover:scale-105 transition-transform flex-shrink-0 border border-white/40 text-white"
+                >
+                  <span className="text-2xl leading-none">{r.logo}</span>
+                  <span className="text-sm font-semibold tracking-wide">
+                    {(r.name || '').toUpperCase().slice(0, 7)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <style jsx>{`
+          @keyframes scroll-rtl {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+          }
+          @keyframes scroll-ltr {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-scroll-rtl {
+            animation: scroll-rtl 40s linear infinite;
+            display: flex;
+            width: max-content;
+          }
+          .animate-scroll-ltr {
+            animation: scroll-ltr 40s linear infinite;
+            display: flex;
+            width: max-content;
+          }
+          .animate-scroll-rtl:hover,
+          .animate-scroll-ltr:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </div>
+
+      {/* Search and District Selection Section */}
+      <div className="relative bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] py-12" id="district-selection">
+        <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] bg-cover mix-blend-overlay opacity-20"></div>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="relative">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-[#181a20]">Discover Local Flavors</h2>
+            <p className="text-lg text-[#181a20]/90 mb-6 max-w-2xl">Choose your district and explore the best restaurants, amazing ambience, and must-try signature dishes.</p>
+            <div className="flex gap-4 items-center">
+              <div className="relative flex-1 max-w-lg">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search restaurants or cuisines..."
+                  className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/95 border-2 border-[#181a20]/10 focus:border-[#181a20]/20 focus:ring-0 text-[#181a20] placeholder-[#181a20]/60"
+                />
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <svg className="w-5 h-5 text-[#181a20]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
+              {searchQuery && (
+                <Button onClick={() => setSearchQuery('')} variant="outline" className="h-12 border-2">
+                  Clear
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <style>{`
+          .district-btn {
+            position: relative;
+            overflow: hidden;
+          }
+          .district-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            background: rgba(255,179,0,0.3);
+            pointer-events: none;
+          }
+          @keyframes ripple {
+            to {
+              transform: scale(4);
+              opacity: 0;
+            }
+          }
+          .district-btn.selected {
+            box-shadow: 0 0 0 4px #ffb30055, 0 4px 24px #ffb30055;
+            border-color: #ffb300;
+          }
+          .district-btn.selected::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            bottom: 0;
+            height: 4px;
+            background: linear-gradient(90deg,#ffb300,#ff7a1a);
+            border-radius: 2px;
+            animation: underline 0.5s;
+          }
+          @keyframes underline {
+            from { width: 0; opacity: 0; }
+            to { width: 80%; opacity: 1; }
+          }
+          .district-btn:hover {
+            box-shadow: 0 0 0 4px #ffb30033, 0 2px 12px #ffb30033;
+            border-color: #ffb300;
+          }
+          .fade-in {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: fadeInUp 0.7s forwards;
+          }
+          @keyframes fadeInUp {
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+          }
+        `}</style>
+        {/* District Selection */}
+        <div className="mb-10">
+          <div className="text-xl text-[#ffb300] font-semibold mb-4">Choose Your District</div>
+          <div className="w-full flex justify-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 w-full max-w-5xl mx-auto">
+              {districts.length === 0 ? (
+                <div className="col-span-full text-gray-400 flex items-center gap-2 justify-center">
+                  <svg className="animate-spin h-5 w-5 text-[#ffb300]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="#ffb300" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                  Loading districts...
+                </div>
+              ) : (
+                districts.map((d: any) => (
+                  <button
+                    key={d.name}
+                    className={`district-btn px-6 py-4 rounded-xl text-base font-semibold transition-all duration-500 border border-[#ffb300]/30 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ffb300] focus:ring-offset-2 focus:ring-offset-[#181a20] whitespace-normal break-words text-center relative overflow-hidden ${
+                      selectedDistrict && selectedDistrict.toLowerCase() === d.name.toLowerCase()
+                        ? 'selected bg-gradient-to-r from-[#ffb300] to-[#ff7a1a] text-[#181a20] scale-110'
+                        : 'bg-[#23242a]/80 text-gray-300 hover:bg-[#ffb300]/20 hover:text-[#ffb300] hover:border-[#ffb300] hover:scale-105'
+                    }`}
+                    style={{ minWidth: '140px', minHeight: '48px', letterSpacing: '0.5px', padding: '0.75rem 1rem', boxShadow: selectedDistrict && selectedDistrict.toLowerCase() === d.name.toLowerCase() ? '0 4px 24px 0 #ffb30055' : undefined }}
+                    onClick={e => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const x = e.clientX - rect.left;
+                      const y = e.clientY - rect.top;
+                      setRipple({x, y, key: d.name + Date.now()});
+                      setSelectedDistrict(d.name);
+                      setTimeout(() => {
+                        if (restaurantSectionRef.current) {
+                          restaurantSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 300);
+                    }}
+                  >
+                    <span className="block w-full">{d.name}</span>
+                    {ripple && ripple.key.startsWith(d.name) && (
+                      <span
+                        className="ripple"
+                        style={{ left: ripple.x, top: ripple.y, width: 40, height: 40 }}
+                        onAnimationEnd={() => setRipple(null)}
+                      />
+                    )}
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+  {/* Only show restaurant/featured sections if a district is selected and data is loaded */}
+  {(selectedDistrict && displayDistrict && restaurants.length > 0) && (
+          <div ref={restaurantSectionRef} className="space-y-16">
+            {/* All Restaurants */}
+            <section>
+              <h2 className="text-3xl font-bold text-white mb-6">
+                Restaurants in {displayDistrict || selectedDistrict}
+                {searchQuery && <span className="text-lg font-normal text-gray-400 ml-3">Search results for "{searchQuery}"</span>}
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredRestaurants.map((r: any, idx: number) => (
+                  <article key={r.id || r.name} className={`group relative rounded-2xl overflow-hidden transform hover:-translate-y-1 transition-all duration-300 fade-in`} style={{ animationDelay: `${idx * 80}ms` }}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <div className="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl overflow-hidden hover:border-[#ffb300]/40">
+                      <div className="relative h-48">
+                        <img src={r.image || 'https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3'} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <h3 className="text-lg font-bold text-white">{r.name}</h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="px-2 py-1 rounded-md bg-white/20 backdrop-blur-sm text-xs text-white">{r.cuisine}</span>
+                            {r.featured && <span className="px-2 py-1 rounded-md bg-[#ffb300] text-xs text-[#181a20] font-medium">Featured</span>}
+                          </div>
+                        </div>
+                        {r.rating && (
+                          <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-md bg-white/90 text-[#181a20] text-sm font-medium">
+                            <Star className="w-4 h-4 text-[#ffb300] fill-current" />
+                            <span>{r.rating}</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-4">
+                        <div className="flex items-center justify-between text-sm text-gray-400">
+                          <div className="flex items-center gap-4">
+                            {r.deliveryTime && (
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                <span>{r.deliveryTime}</span>
+                              </div>
+                            )}
+                            {r.distance && (
+                              <div className="flex items-center gap-1">
+                                <MapPin className="w-4 h-4" />
+                                <span>{r.distance}</span>
+                              </div>
+                            )}
+                          </div>
+                          {r.priceRange && <span className="text-[#ffb300]">{r.priceRange}</span>}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            {/* Featured Ambience */}
+            {featuredAmbience.length > 0 && (
+              <section>
+                <h2 className="text-3xl font-bold text-white mb-6">
+                  Featured Restaurants in {displayDistrict || selectedDistrict} – Best in Ambience
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {featuredAmbience.map((r: any) => (
+                    <article key={r.id || r.name} className="group relative rounded-2xl overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                      <div className="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl overflow-hidden hover:border-[#ffb300]/40">
+                        <div className="relative h-48">
+                          <img src={r.image || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3'} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                          <div className="absolute top-4 left-4">
+                            <span className="px-3 py-1 rounded-full bg-[#ffb300] text-xs text-[#181a20] font-medium">Featured Ambience</span>
+                          </div>
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <h3 className="text-lg font-bold text-white mb-1">{r.name}</h3>
+                            <div className="flex items-center gap-2">
+                              <span className="px-2 py-1 rounded-md bg-white/20 backdrop-blur-sm text-xs text-white">{r.cuisine}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Featured Must Try */}
+            {featuredDishes.length > 0 && (
+              <section className="mb-20">
+                <h2 className="text-3xl font-bold text-white mb-6">
+                  Featured Restaurants in {displayDistrict || selectedDistrict} – Must Try Dishes
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {featuredDishes.map((r: any) => (
+                    <article key={r.id || r.name} className="group relative rounded-2xl overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#ffb300] to-[#ff7a1a] rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                      <div className="relative bg-[#23242a]/80 backdrop-blur-sm border border-[#ffb300]/20 rounded-2xl overflow-hidden hover:border-[#ffb300]/40">
+                        <div className="relative h-48">
+                          <img src={r.image || 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3'} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                          <div className="absolute top-4 left-4">
+                            <span className="px-3 py-1 rounded-full bg-[#ffb300] text-xs text-[#181a20] font-medium">Must Try</span>
+                          </div>
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <h3 className="text-lg font-bold text-white mb-1">{r.name}</h3>
+                            <div className="flex items-center gap-2">
+                              <span className="px-2 py-1 rounded-md bg-white/20 backdrop-blur-sm text-xs text-white">{r.cuisine}</span>
+                            </div>
+                            {r.signatureDish && (
+                              <div className="mt-2 px-3 py-1 rounded-md bg-white/90 text-sm text-[#181a20] inline-block">
+                                Try: {r.signatureDish}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

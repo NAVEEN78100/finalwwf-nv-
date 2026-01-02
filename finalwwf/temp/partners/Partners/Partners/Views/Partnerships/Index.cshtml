@@ -1,0 +1,255 @@
+﻿@model Partners.ViewModels.PartnershipsIndexViewModel
+@{
+    ViewData["Title"] = "Be a Partner";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/partnerships.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sections.css" asp-append-version="true" />
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-inner container">
+            <div class="hero-text">
+                <h1>@Model.HeroTitle</h1>
+                <p>@Model.HeroTagline</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners container">
+        <header class="partners-head">
+            <h2>Be a partner</h2>
+            <p>Get listed in our application under any of these categories.</p>
+        </header>
+
+        <div class="card-grid">
+            @foreach (var c in Model.Cards)
+            {
+                <article class="partner-card"
+                         data-category="@( (int)c.Category )"
+                         data-title="@c.Title"
+                         data-terms='@Html.Raw(Model.TermsHtml[c.Category])'>
+                    <div class="img-wrap">
+                        <img src="@Url.Content(c.ImageUrl)" alt="@c.Title" class="img-fluid" />
+                    </div>
+                    <div class="card-body">
+                        <h3>@c.Title</h3>
+                        <p>@c.Subtitle</p>
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
+
+    <!-- Drawer / side panel -->
+    <div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-labelledby="drawerTitle">
+        <button class="drawer-close" data-close aria-label="Close">&times;</button>
+        <div class="drawer-header">
+            <div class="drawer-img-wrap">
+                <img id="drawerImg" src="" alt="Partner Image" />
+            </div>
+            <h3 id="drawerTitle">Partnership Details</h3>
+            <p class="drawer-sub">Eligibility & Requirements</p>
+        </div>
+        <div class="drawer-body">
+            <div id="drawerTerms" class="terms"></div>
+
+            <form id="leadForm" method="post" action="@Url.Action("Submit","Partnerships")" novalidate>
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Category" id="leadCategory" />
+
+                <div class="form-grid">
+                    <div class="full" style="margin-bottom:0;">
+                        <label for="leadEmail" style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:4px; display:block;">
+                            Email Address *
+                        </label>
+                        <input name="Email"
+                               id="leadEmail"
+                               type="email"
+                               required
+                               maxlength="100"
+                               placeholder="Enter your email address"
+                               style="background: #f7f8fa; border: 1.5px solid #e3e5eb; border-radius: 10px; padding: 14px 16px; font-size:15px; color:#232b36; box-sizing: border-box; width: 100%; font-family: inherit; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;"
+                               autocomplete="email" />
+                        <button type="button" id="sendOtpBtn" class="btn-primary" style="margin-top:10px; width:100%; max-width:180px;">Send OTP</button>
+                    </div>
+
+                    <div class="full" id="otpSection" style="display:none;">
+                        <label for="otpInput" style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:4px; display:block;">
+                            Enter OTP *
+                        </label>
+                        <input type="text"
+                               id="otpInput"
+                               maxlength="6"
+                               pattern="\d{6}"
+                               placeholder="Enter the OTP sent to your email"
+                               autocomplete="one-time-code"
+                               inputmode="numeric"
+                               style="background: #f7f8fa; border: 1.5px solid #e3e5eb; border-radius: 10px; padding: 14px 16px; font-size:18px; letter-spacing:5px; color:#232b36; box-sizing: border-box; width: 100%; font-family: inherit; text-align:center; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;" />
+                        <button type="button" id="verifyOtpBtn" class="btn-primary" style="margin-top:10px; width:100%; max-width:180px;">Verify OTP</button>
+                        <div id="otpTimerDisplay" class="otp-timer" style="color:var(--muted); margin-top:8px;"></div>
+                    </div>
+                </div>
+
+                <div id="extraFields" style="display:none;">
+                    <div class="form-grid">
+                        <div>
+                            <label for="leadName" style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:4px; display:block;">
+                                Full Name *
+                            </label>
+                            <input name="Name" id="leadName" required maxlength="80" placeholder="Enter your full name"
+                                   style="background: #f7f8fa; border: 1.5px solid #e3e5eb; border-radius: 10px; padding: 14px 16px; font-size:15px; color:#232b36; box-sizing: border-box; width: 100%; font-family: inherit; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;" />
+                        </div>
+                        <div>
+                            <label for="leadPhone" style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:4px; display:block;">
+                                Contact Number *
+                            </label>
+                            <input name="Phone" id="leadPhone" required maxlength="30" placeholder="Enter phone number"
+                                   style="background: #f7f8fa; border: 1.5px solid #e3e5eb; border-radius: 10px; padding: 14px 16px; font-size:15px; color:#232b36; box-sizing: border-box; width: 100%; font-family: inherit; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;" />
+                        </div>
+
+                        <!-- STATE DROPDOWN -->
+                        <div>
+                            <label for="leadState" style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:4px; display:block;">
+                                State *
+                            </label>
+                            <select name="State" id="leadState" required
+                                    style="background: #f7f8fa; border: 1.5px solid #e3e5eb; border-radius: 10px; padding: 14px 16px; font-size:15px; color:#232b36; box-sizing: border-box; width: 100%; font-family: inherit; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s; cursor: pointer;">
+                                <option value="">Select State</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Puducherry">Puducherry</option>
+                            </select>
+                        </div>
+
+                        <!-- LOCATION INPUT -->
+                        <div class="full">
+                            <label for="leadLocation" style="font-size:14px; color:var(--muted); font-weight:500; margin-bottom:4px; display:block;">
+                                Business Location / Address *
+                            </label>
+                            <input name="Location" id="leadLocation" required maxlength="150" placeholder="Enter business address (Street, City, Pin)"
+                                   style="background: #f7f8fa; border: 1.5px solid #e3e5eb; border-radius: 10px; padding: 14px 16px; font-size:15px; color:#232b36; box-sizing: border-box; width: 100%; font-family: inherit; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;" />
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group" style="margin:18px 0;">
+                        <label class="checkbox-label" style="font-size:14px; color:var(--text);">
+                            <input type="checkbox" name="AcceptTerms" id="acceptTerms" value="true" style="accent-color: var(--brand); margin-right:6px;" disabled />
+                            I have read and accept the
+                            <span id="showTermsLink" class="terms-link" tabindex="0" style="color: var(--brand); text-decoration:underline; cursor:pointer;">
+                                terms and conditions
+                            </span> *
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary" id="submitBtn" disabled style="width:100%; max-width:240px;">Submit Partnership Request</button>
+                </div>
+
+                <p id="leadMsg" class="lead-msg" role="status" aria-live="polite" style="margin-top:14px; min-height:16px;"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal" id="confirmationModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎉 Application Submitted Successfully!</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for your interest in becoming our partner!</p>
+                <p>We've received your partnership application and our team will review your details.</p>
+                <p><strong>Next Steps:</strong></p>
+                <ul>
+                    <li>Our partnership team will contact you within 2-3 business days</li>
+                    <li>We may request additional documentation</li>
+                    <li>OTP verification will be required for final approval</li>
+                </ul>
+                <p class="note"><strong>Note:</strong> Please ensure your contact details are accurate for smooth communication.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="modalOk">Got it, Thanks!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full-page Terms and Conditions Drawer -->
+    <div id="termsDrawer" class="terms-drawer" aria-hidden="true" tabindex="-1">
+        <div class="terms-drawer-header">
+            <h3>Terms and Conditions</h3>
+            <button class="terms-drawer-close" id="closeTermsDrawer" aria-label="Close Terms Drawer" type="button">&times;</button>
+        </div>
+        <div class="terms-drawer-body" style="max-height:80vh; overflow-y:auto;">
+            <p><strong>Sample Terms and Policies</strong></p>
+            <ul>
+                <li>Users must provide accurate information on the form.</li>
+                <li>Partnership requests are subject to verification.</li>
+                <li>Partner must comply with all local regulations.</li>
+                <li>No spam or fraudulent submissions allowed.</li>
+                <li>Your contact information will only be used for partnership purposes.</li>
+                <li>Other conditions may apply at our discretion.</li>
+                <li>By accepting, you consent to data processing as per our privacy policy.</li>
+            </ul>
+        </div>
+        <div class="terms-drawer-footer">
+            <button id="acceptTermsBtnDrawer" class="btn-primary" type="button">Accept & Return</button>
+        </div>
+    </div>
+    <div id="termsDrawerBackdrop" style="position:fixed;inset:0;z-index:1199;background:rgba(0,0,0,.32);display:none;"></div>
+
+    @* Include the three new sections *@
+    @await Html.PartialAsync("_CTASection")
+    @await Html.PartialAsync("_FooterSection")
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("NKqMo7yjfTsoYYysu");
+        })();
+    </script>
+
+    <script src="~/js/partnerships.js" asp-append-version="true"></script>
+
+</body>
+</html>

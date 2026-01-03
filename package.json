@@ -1,10 +1,9 @@
   {
     "name": "finalwwf",
     "private": true,
-  
-    "scripts": {
-      "dev": "npm run dev --workspace finalwwf",
-      "build": "npm run build --workspace finalwwf",
+  "workspaces": [
+    "finalwwf"
+  ],
       "start": "npm run start --workspace finalwwf",
       "lint": "npm run lint --workspace finalwwf",
       "seed": "npm run seed --workspace finalwwf",

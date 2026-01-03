@@ -1,7 +1,7 @@
 {
   "framework": "nextjs",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build --workspace finalwwf",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build --filter finalwwf",
   "version": 2
 
 }

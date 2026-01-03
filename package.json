@@ -1,12 +1,16 @@
-  {
+{
     "name": "finalwwf",
     "private": true,
-  "workspaces": [
-    "finalwwf"
-  ],
-      "start": "npm run start --workspace finalwwf",
-      "lint": "npm run lint --workspace finalwwf",
-      "seed": "npm run seed --workspace finalwwf",
-      "api": "npm run api --workspace finalwwf"
+    "workspaces": [
+        "finalwwf"
+    ],
+    "start": "npm run start --workspace finalwwf",
+    "lint": "npm run lint --workspace finalwwf",
+    "seed": "npm run seed --workspace finalwwf",
+    "api": "npm run api --workspace finalwwf",
+    "dependencies": {
+        "next": "^16.1.1",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3"
     }
-  }
+}
